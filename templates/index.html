@@ -53,7 +53,6 @@
             font-size: 42px;
             font-weight: 300;
             letter-spacing: -1px;
-            color: var(--text);
             margin-bottom: 8px;
         }
 
@@ -121,38 +120,8 @@
         button:hover { opacity: 0.9; }
         button:active { transform: scale(0.99); }
         button:disabled { opacity: 0.5; cursor: not-allowed; }
-        
-        .result-card {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 28px;
-            display: none;
-            animation: slideUp 0.3s ease;
-        }
 
-        @keyframes slideUp {
-            from { opacity: 0; transform: translateY(12px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .result-title {
-            font-size: 12px;
-            font-weight: 500;
-            letter-spacing: 2px;
-            color: var(--accent);
-            text-transform: uppercase;
-            margin-bottom: 20px;
-        }
-
-        .badges {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 12px;
-            margin-bottom: 24px;
-        }
-
-        badge {
+        .badge {
             background: var(--bg);
             border: 1px solid var(--border);
             border-radius: 10px;
@@ -180,6 +149,31 @@
         .difficulty-média { color: var(--warning); }
         .difficulty-difícil { color: var(--danger); }
 
+        .result-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 28px;
+            display: none;
+            animation: slideUp 0.3s ease;
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(12px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .result-title {
+            font-size: 12px;
+            font-weight: 500;
+            letter-spacing: 2px;
+            color: var(--accent);
+            text-transform: uppercase;
+            margin-bottom: 20px;
+        }
+
+        .badges { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 24px; }
+
         .section-title {
             font-size: 13px;
             font-weight: 500;
@@ -198,7 +192,6 @@
             padding: 10px 0;
             border-bottom: 1px solid var(--border);
             font-size: 15px;
-            color: var(--text);
         }
 
         .subtasks li:last-child { border-bottom: none; }
@@ -217,7 +210,6 @@
             border-radius: 10px;
             padding: 14px 16px;
             font-size: 14px;
-            color: var(--text);
             line-height: 1.5;
         }
 
@@ -312,7 +304,7 @@
             const task = document.getElementById("task-input").value;
             const btn = document.getElementById("analyze-btn");
             const loading = document.getElementById("loading");
-            const resultCard = document.querySelector(".result-card");
+            const resultCard = document.getElementById("result-card");
             const errorMsg = document.getElementById("error-msg");
 
             resultCard.style.display = "none";
@@ -358,7 +350,6 @@
 
             const subtasksList = document.getElementById("subtasks");
             subtasksList.innerHTML = "";
-
             data.subtarefas.forEach(subtask => {
                 const li = document.createElement("li");
                 li.textContent = subtask;
@@ -368,9 +359,9 @@
             document.getElementById("tip").innerHTML =
                 "<strong> Dica:</strong> " + data.dica;
 
-            document.getElementById("result-card").style.display = "block";
-
-            document.getElementById("result-card").scrollIntoView({ behavior: "smooth" });
+            const resultCard = document.getElementById("result-card");
+            resultCard.style.display = "block";
+            resultCard.scrollIntoView({ behavior: "smooth" });
         }
 
         document.getElementById("task-input").addEventListener("keydown", function(e) {
