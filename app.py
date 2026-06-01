@@ -8,7 +8,10 @@ load_dotenv()
 app = Flask(__name__)
 
 api_key = os.getenv("ANTHROPIC_API_KEY")
+
 client = Anthropic(api_key=api_key)
+
+
 
 @app.route("/")
 def index():
